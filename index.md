@@ -38,14 +38,14 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
 {% endcomment %}
 
-### Andy Gao
+# Andy Gao
 The page of a CS and Math/Stat major at Purdue University.
 
-# COMMUNICATION & PERSONAL
+## COMMUNICATION & PERSONAL
 The best way to contact me is by email 
 - gaoandy1445@gmail.com
 
-# SHOWCASE & EVIDENCE
+## SHOWCASE & EVIDENCE
 - evidence of competencies and achievement
 - recordings of language/music/speaking skills
 - drama/acting evidence
@@ -54,7 +54,7 @@ The best way to contact me is by email
 - professional development plan, records and notes
 - work related/based assessment
 - awards and certificates
-# LEARNING, TEACHING & REFLECTION
+## LEARNING, TEACHING & REFLECTION
 - short term goals and long-term improvement targets
 - individual learning plans
 - class-work notes
@@ -67,14 +67,14 @@ The best way to contact me is by email
 - notes justifying choice of particular showcase items
 - feedback and feed-forward (teachers, peers, family, friends)
 - assessments and self assessment
-# PROFESSIONAL
+## PROFESSIONAL
 - education history
 - appraisal reviews
 - courses attended, courses presented
 - papers, presentations and publications
 - work experience, volunteer work
 - credits, qualifications and resumé/CV
-# RESOURCES & REFERENCES
+## RESOURCES & REFERENCES
 - links to online resources
 - artefacts – may be discrete or packaged evidence of learning
 - files embedded reference/resource material
