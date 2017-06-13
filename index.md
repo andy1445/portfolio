@@ -41,17 +41,15 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 # Andy Gao
 The page of a CS and Math/Stat major at Purdue University. Interested in Artificial Intelligence, research, and easy to use website design software
 
-## COMMUNICATION & PERSONAL
+### COMMUNICATION & PERSONAL
 The best way to contact me is by email 
 - gaoandy1445@gmail.com
+Add me on [LinkedIn](https://linkedin.com/in/andy1445)
 
-## SKILLS
+### SKILLS
 - python, java, C, C++, some website design, Adobe Photoshop
 
-## PROFESSIONAL
+### PROFESSIONAL
 - current student at Purdue University
 - Former TA in CS 177 - python
 - credits, qualifications and resumé/CV
-
-## RESOURCES & REFERENCES
-- add me on Linkedin
