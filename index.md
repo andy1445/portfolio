@@ -39,43 +39,19 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 {% endcomment %}
 
 # Andy Gao
-The page of a CS and Math/Stat major at Purdue University.
+The page of a CS and Math/Stat major at Purdue University. Interested in Artificial Intelligence, research, and easy to use website design software
 
 ## COMMUNICATION & PERSONAL
 The best way to contact me is by email 
 - gaoandy1445@gmail.com
 
-## SHOWCASE & EVIDENCE
-- evidence of competencies and achievement
-- recordings of language/music/speaking skills
-- drama/acting evidence
-- interviews and interview skills recording
-- evidence of course awards and certification
-- professional development plan, records and notes
-- work related/based assessment
-- awards and certificates
-## LEARNING, TEACHING & REFLECTION
-- short term goals and long-term improvement targets
-- individual learning plans
-- class-work notes
-- homework
-- assignments
-- projects
-- creative writing
-- course-work outlines
-- reflection
-- notes justifying choice of particular showcase items
-- feedback and feed-forward (teachers, peers, family, friends)
-- assessments and self assessment
+## SKILLS
+- python, java, C, C++, some website design, Adobe Photoshop
+
 ## PROFESSIONAL
-- education history
-- appraisal reviews
-- courses attended, courses presented
-- papers, presentations and publications
-- work experience, volunteer work
+- current student at Purdue University
+- Former TA in CS 177 - python
 - credits, qualifications and resumé/CV
+
 ## RESOURCES & REFERENCES
-- links to online resources
-- artefacts – may be discrete or packaged evidence of learning
-- files embedded reference/resource material
-- resource artefacts
+- add me on Linkedin
