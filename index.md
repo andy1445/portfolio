@@ -44,6 +44,7 @@ The page of a CS and Math/Stat major at Purdue University. Interested in Artific
 ### COMMUNICATION & PERSONAL
 The best way to contact me is by email 
 - gaoandy1445@gmail.com
+
 Add me on [LinkedIn](https://linkedin.com/in/andy1445)
 
 ### SKILLS
