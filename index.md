@@ -38,13 +38,12 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
 {% endcomment %}
 
+The page of some CS and Math/Stat major at Purdue University.
+
 # COMMUNICATION & PERSONAL
-- personal profile
-- personal values and interests
-- personal development plans
-- peer and teacher/mentor comments and reviews
-- social communication and contacts
-- journal (blog)
+The best way to contact me is by email 
+- gaoandy1445@gmail.com
+
 # SHOWCASE & EVIDENCE
 - evidence of competencies and achievement
 - recordings of language/music/speaking skills
