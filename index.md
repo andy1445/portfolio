@@ -54,4 +54,4 @@ Add me on [LinkedIn](https://linkedin.com/in/andy1445)
 - current student at Purdue University
 - Former TA in CS 177 - python
 - currently conducting summer research in PPG signals from video
-- get my [resume here](/Resume.pdf)
+- get my [resume here](/Resumeafter.pdf)
