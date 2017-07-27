@@ -39,7 +39,7 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 {% endcomment %}
 
 # Andy Gao
-The page of a CS and Math/Stat major at Purdue University. Interested in Artificial Intelligence, research, and easy to use website design software
+The page of a Computer Science and Math/Stat major at Purdue University. Interested in Artificial Intelligence, research, and easy to use website design software
 
 ### COMMUNICATION & PERSONAL
 The best way to contact me is by email 
@@ -48,7 +48,7 @@ The best way to contact me is by email
 Add me on [LinkedIn](https://linkedin.com/in/andy1445)
 
 ### SKILLS
-- python, java, C, C++, some website design, Adobe Photoshop
+- python, java, C, C++, ARM assembly, Adobe Photoshop, some website design
 
 ### PROFESSIONAL
 - current student at Purdue University
