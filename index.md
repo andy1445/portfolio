@@ -44,11 +44,11 @@ The page of a Computer Science and Math/Stat major at Purdue University. Interes
 ### COMMUNICATION & PERSONAL
 The best way to contact me is by email 
 - gaoandy1445@gmail.com
-
-Add me on [LinkedIn](https://linkedin.com/in/andy1445)
+- or add me on [LinkedIn](https://linkedin.com/in/andy1445)
 
 ### SKILLS
-- python, java, C, C++, ARM assembly, Adobe Photoshop, some website design
+- Python, Java, C, C++, ARM assembly, Adobe Photoshop, some website design
+- Some amatuer artwork [here](https://its-trivial.deviantart.com/)
 
 ### PROFESSIONAL
 - current student at Purdue University
