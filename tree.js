@@ -120,30 +120,10 @@ class Tree {
         ctx.stroke();
     };
 
-    draw_flower(center, length, angle) {
+    draw_flower(center, length) {
         let ctx = this.screen;
         ctx.fillStyle = this.color;
-        // for (var i = 0; i < 3; i++)
-        ctx.fillRect(center.x, center.y, Math.random(), Math.random());
-
-        // var ll = length / 2;
-        // var sl = length / 8;
-        // var part1 = new Array();
-        // var part2 = new Array();
-        // // hardcode flower shape
-        // part1.push({ x: center.x + ll * Math.cos(angle), y: center.y + ll * Math.sin(angle) });
-        // part1.push({ x: center.x + sl * Math.cos(angle + Math.PI / 2), y: center.y + sl * Math.sin(angle + Math.PI / 2) });
-        // part1.push({ x: center.x + ll * Math.cos(angle + Math.PI), y: center.y + ll * Math.sin(angle + Math.PI) });
-        // part1.push({ x: center.x + sl * Math.cos(angle + Math.PI * 3 / 2), y: center.y + sl * Math.sin(angle + Math.PI * 3 / 2) });
-        // part2.push({ x: center.x + sl * Math.cos(angle), y: center.y + sl * Math.sin(angle) });
-        // part2.push({ x: center.x + ll * Math.cos(angle + Math.PI / 2), y: center.y + ll * Math.sin(angle + Math.PI / 2) });
-        // part2.push({ x: center.x + sl * Math.cos(angle + Math.PI), y: center.y + sl * Math.sin(angle + Math.PI) });
-        // part2.push({ x: center.x + ll * Math.cos(angle + Math.PI * 3 / 2), y: center.y + ll * Math.sin(angle + Math.PI * 3 / 2) });
-
-        // for (var i = 0; i < 3; i++) {
-        //     this.drawline(this.screen, part1[i], part1[i + 1], 1);
-        //     this.drawline(this.screen, part2[i], part2[i + 1], 1);
-        // }
+        ctx.fillRect(center.x, center.y, length, length);
     }
 
     //the start theta defines the current planes rotation
@@ -174,7 +154,7 @@ class Tree {
                 if (length > 30) {
                     var array = new Array(31).join('0').split('').map(parseFloat);
                     this.random_koch(0, 29, 5, 0.5, array);
-                    this.draw_lines(array, this.screen, center, new_point, thickness);
+                    this.draw_lines(array, this.screen, center, new_point);
                 }
                 else {
                     this.drawline(this.screen, center, new_point);
@@ -188,7 +168,7 @@ class Tree {
         for (var i = 0; i < num_branch - 1; i++) { //randomize the number of branches 
             theta = this.randInt(50, 100) / 100 * Math.PI / 4;
             if (olength < 2) { //stop branching, flower
-                this.draw_flower(center, 4, theta);
+                this.draw_flower(center, thickness);
             }
             else {
                 var current_center = { x: center.x - (spot * Math.cos(start_theta)), y: center.y + (spot * Math.sin(start_theta)) };
@@ -222,16 +202,11 @@ class Tree {
         var branchless_trunk = this.trunk_length - branch_trunk;
         var num_branch = this.randInt(1, 2);
         var increment = branch_trunk / num_branch; //place branches along trunk on this increment
-        var percent;
-        var placement;
-        var branch_center;
 
         for (var i = 0; i < num_branch; i++) {
-            //50% to 100% of placement
-            percent = this.randInt(50, 100) / 100;
-            placement = branchless_trunk + (increment * i * percent);
+            var placement = branchless_trunk + (increment * i * Math.random());
             //place random branching along spot on trunk
-            branch_center = { x: this.center.x, y: this.center.y - placement };
+            var branch_center = { x: this.center.x, y: this.center.y - placement };
             this.random_flower(branch_center, placement * 0.7, 2, (Math.PI / 2));
         }
 
@@ -253,7 +228,6 @@ $(document).ready(function () {
         onload();
     });
     function onload() {
-        var color = "#" + Math.random().toString(16).slice(2, 8);
         canvas = document.getElementById("myCanvas");
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
@@ -261,7 +235,11 @@ $(document).ready(function () {
         // draw trees
         let totTrees = 3;
         for (let i = 0; i < totTrees; i++) {
-            new Tree({ x: Math.random() * canvas.width, y: canvas.height }, 550, 2, Math.PI / 6, color).draw_tree();
+            center=new Tree({ x: Math.random() * canvas.width, y: canvas.height }, 
+            length=Math.round(canvas.height*5/6), 
+            thickness=10, 
+            theta=Math.PI/2, 
+            color="#"+Math.random().toString(16).slice(2, 8)).draw_tree();
         }
 
         // draw the ground 
@@ -275,7 +253,7 @@ $(document).ready(function () {
             ctx.lineTo(x_inc * i, canvas.height - Math.abs(array[i]) - 30)
         }
         // complete the square
-        ctx.fillStyle = color;
+        ctx.fillStyle = "#" + Math.random().toString(16).slice(2, 8);
         ctx.lineTo(canvas.width, canvas.height);
         ctx.lineTo(0, canvas.height);
         ctx.lineTo(0, canvas.height - 30);
