@@ -249,14 +249,12 @@ class Tree {
 $(document).ready(function () {
     onload();
 
-    $(".reload").click(function(){
+    $(".reload").click(function () {
         onload();
     });
     function onload() {
         var color = "#" + Math.random().toString(16).slice(2, 8);
         canvas = document.getElementById("myCanvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
 
