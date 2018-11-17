@@ -121,24 +121,29 @@ class Tree {
     };
 
     draw_flower(center, length, angle) {
-        var ll = length / 2;
-        var sl = length / 8;
-        var part1 = new Array();
-        var part2 = new Array();
-        // hardcode flower shape
-        part1.push({ x: center.x + ll * Math.cos(angle), y: center.y + ll * Math.sin(angle) });
-        part1.push({ x: center.x + sl * Math.cos(angle + Math.PI / 2), y: center.y + sl * Math.sin(angle + Math.PI / 2) });
-        part1.push({ x: center.x + ll * Math.cos(angle + Math.PI), y: center.y + ll * Math.sin(angle + Math.PI) });
-        part1.push({ x: center.x + sl * Math.cos(angle + Math.PI * 3 / 2), y: center.y + sl * Math.sin(angle + Math.PI * 3 / 2) });
-        part2.push({ x: center.x + sl * Math.cos(angle), y: center.y + sl * Math.sin(angle) });
-        part2.push({ x: center.x + ll * Math.cos(angle + Math.PI / 2), y: center.y + ll * Math.sin(angle + Math.PI / 2) });
-        part2.push({ x: center.x + sl * Math.cos(angle + Math.PI), y: center.y + sl * Math.sin(angle + Math.PI) });
-        part2.push({ x: center.x + ll * Math.cos(angle + Math.PI * 3 / 2), y: center.y + ll * Math.sin(angle + Math.PI * 3 / 2) });
+        let ctx = this.screen;
+        ctx.fillStyle = this.color;
+        // for (var i = 0; i < 3; i++)
+        ctx.fillRect(center.x, center.y, Math.random(), Math.random());
+        
+        // var ll = length / 2;
+        // var sl = length / 8;
+        // var part1 = new Array();
+        // var part2 = new Array();
+        // // hardcode flower shape
+        // part1.push({ x: center.x + ll * Math.cos(angle), y: center.y + ll * Math.sin(angle) });
+        // part1.push({ x: center.x + sl * Math.cos(angle + Math.PI / 2), y: center.y + sl * Math.sin(angle + Math.PI / 2) });
+        // part1.push({ x: center.x + ll * Math.cos(angle + Math.PI), y: center.y + ll * Math.sin(angle + Math.PI) });
+        // part1.push({ x: center.x + sl * Math.cos(angle + Math.PI * 3 / 2), y: center.y + sl * Math.sin(angle + Math.PI * 3 / 2) });
+        // part2.push({ x: center.x + sl * Math.cos(angle), y: center.y + sl * Math.sin(angle) });
+        // part2.push({ x: center.x + ll * Math.cos(angle + Math.PI / 2), y: center.y + ll * Math.sin(angle + Math.PI / 2) });
+        // part2.push({ x: center.x + sl * Math.cos(angle + Math.PI), y: center.y + sl * Math.sin(angle + Math.PI) });
+        // part2.push({ x: center.x + ll * Math.cos(angle + Math.PI * 3 / 2), y: center.y + ll * Math.sin(angle + Math.PI * 3 / 2) });
 
-        for (var i = 0; i < 3; i++) {
-            this.drawline(this.screen, part1[i], part1[i + 1], 1);
-            this.drawline(this.screen, part2[i], part2[i + 1], 1);
-        }
+        // for (var i = 0; i < 3; i++) {
+        //     this.drawline(this.screen, part1[i], part1[i + 1], 1);
+        //     this.drawline(this.screen, part2[i], part2[i + 1], 1);
+        // }
     }
 
     //the start theta defines the current planes rotation
@@ -217,10 +222,10 @@ class Tree {
         var branchless_trunk = this.trunk_length - branch_trunk;
         var num_branch = this.randInt(1, 2);
         var increment = branch_trunk / num_branch; //place branches along trunk on this increment
-
         var percent;
         var placement;
         var branch_center;
+
         for (var i = 0; i < num_branch; i++) {
             //50% to 100% of placement
             percent = this.randInt(50, 100) / 100;
@@ -252,12 +257,13 @@ $(document).ready(function () {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
 
+        // draw trees
         let totTrees = 3;
         for (let i = 0; i < totTrees; i++) {
             new Tree({ x: Math.random() * canvas.width, y: canvas.height }, 550, 2, Math.PI / 6, color).draw_tree();
         }
 
-        //draw the ground 
+        // draw the ground 
         var array = new Array(51).join('0').split('').map(parseFloat);
         new Tree().random_koch(0, 49, 50, 0.75, array);
         ctx = document.getElementById("myCanvas").getContext("2d");
@@ -267,7 +273,7 @@ $(document).ready(function () {
         for (var i = 0; i < array.length; i++) {
             ctx.lineTo(x_inc * i, canvas.height - Math.abs(array[i]) - 30)
         }
-        //complete the square
+        // complete the square
         ctx.fillStyle = color;
         ctx.lineTo(canvas.width, canvas.height);
         ctx.lineTo(0, canvas.height);

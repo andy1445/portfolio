@@ -4,10 +4,6 @@ body, html {
 
 }
 
-html, h1, h2, body, form, fieldset, table, tr, td, img {
-    font-family: Arial,sans-serif;
-    font-weight:lighter;
-}
 
 #myCanvas {
     /* position: fixed;  */
