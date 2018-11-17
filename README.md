@@ -1,2 +1,1 @@
-# eurawebsite
-I stole this from eura
+Much thanks to https://github.com/eurashin for providing the base code
