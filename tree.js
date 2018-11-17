@@ -125,7 +125,7 @@ class Tree {
         ctx.fillStyle = this.color;
         // for (var i = 0; i < 3; i++)
         ctx.fillRect(center.x, center.y, Math.random(), Math.random());
-        
+
         // var ll = length / 2;
         // var sl = length / 8;
         // var part1 = new Array();
@@ -247,10 +247,13 @@ class Tree {
 }
 
 $(document).ready(function () {
-    var color = "#" + Math.random().toString(16).slice(2, 8);
-    onload(color);
+    onload();
 
-    function onload(color) {
+    $(".reload").click(function(){
+        onload();
+    });
+    function onload() {
+        var color = "#" + Math.random().toString(16).slice(2, 8);
         canvas = document.getElementById("myCanvas");
         canvas.style.width = "100%";
         canvas.style.height = "100%";
