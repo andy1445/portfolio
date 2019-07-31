@@ -233,7 +233,7 @@ $(document).ready(function () {
         canvas.height = canvas.offsetHeight;
 
         // draw trees
-        let totTrees = 3;
+        let totTrees = 2;
         for (let i = 0; i < totTrees; i++) {
             center=new Tree({ x: Math.random() * canvas.width, y: canvas.height }, 
             length=Math.round(canvas.height*5/6), 
