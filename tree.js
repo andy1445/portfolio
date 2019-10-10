@@ -271,8 +271,8 @@ $(document).ready(function () {
 
     // drawtrees();
     $(".submit").click(function () {
-        console.log(Math.min($('#in_numtrees').val(), 100), $('#in_color').val());
-        drawtrees(totTrees=$('#in_numtrees').val(), color=$('#in_color').val());
+        // console.log(Math.min($('#in_numtrees').val(), 50), $('#in_color').val());
+        drawtrees(totTrees=Math.min($('#in_numtrees').val(), 50), color=$('#in_color').val());
         // return false;
     });
 });
