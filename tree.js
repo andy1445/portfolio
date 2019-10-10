@@ -273,6 +273,6 @@ $(document).ready(function () {
     $(".submit").click(function () {
         console.log($('#in_numtrees').val(), $('#in_color').val());
         drawtrees(totTrees=$('#in_numtrees').val(), color=$('#in_color').val());
-        return false;
+        // return false;
     });
 });
