@@ -271,7 +271,7 @@ $(document).ready(function () {
 
     // drawtrees();
     $(".submit").click(function () {
-        console.log($('#in_numtrees').val(), $('#in_color').val());
+        console.log(Math.min($('#in_numtrees').val(), 100), $('#in_color').val());
         drawtrees(totTrees=$('#in_numtrees').val(), color=$('#in_color').val());
         // return false;
     });
