@@ -1,22 +1,12 @@
-class Tree {
-    constructor(center = null, length = null, thickness = null, theta = null, color = "#4E90EC") {
-        this.center = center;
-        this.length = length;
-        this.thickness = thickness;
-        this.theta = theta;
-        this.color = color;
-        this.trunk_length = Math.round((Math.random() * (.5 - .3) + .5) * length);
-        this.screen = document.getElementById("myCanvas").getContext("2d");
-    }
-
-    randInt(min, max) {
+$(document).ready(function () {
+    function randInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
-
+    
     //returns randomized koch curve
-    random_koch(left, right, displacement, roughness, array) {
+    function random_koch(left, right, displacement, roughness, array) {
         if ((left + 1) == right) {
             return;
         }
@@ -24,12 +14,21 @@ class Tree {
         var change = ((Math.random() * 2) - 1) * displacement;
         array[mid] = ((array[left] + array[right]) / 2 + change);
         displacement = displacement * roughness
-
-        this.random_koch(left, mid, displacement, roughness, array);
-        this.random_koch(mid, right, displacement, roughness, array);
+    
+        random_koch(left, mid, displacement, roughness, array);
+        random_koch(mid, right, displacement, roughness, array);
     }
 
-    draw_lines(array, screen, point1, point2) {
+    function drawline(ctx, p1, p2, color) {
+        // ctx = document.getElementById("myCanvas").getContext("2d");
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+    }
+
+    function draw_lines(array, screen, point1, point2, color) {
         //solve line equation
         var unit_vector;
         if (point1.x == point2.x) //vertical line
@@ -52,19 +51,19 @@ class Tree {
                 var unit_vector = { x: vector.x / vector_length, y: vector.y / vector_length };
             }
         }
-
+    
         //draw line between two points
         var length;
         if (point1.x == point2.x || m == 0) //vert or hor
             length = Math.sqrt(Math.pow((point2.x - point1.x), 2) + Math.pow((point2.y - point1.y), 2));
         else
             length = Math.abs(point2.x - point1.x);
-
+    
         var increment = length / array.length;
         var point_arr = new Array();
         for (var i = 0; i < array.length; i++)
             point_arr.push({ x: 0, y: 0 });
-
+    
         var x, y, x2, y2;
         for (i = 0; i < array.length - 1; i++) {
             if (point1.x == point2.x) { //vertical
@@ -92,7 +91,7 @@ class Tree {
                     y2 = (m * x2 + b);
                 }
             }
-
+    
             //the array is the displacement perpendicular from the line
             var scaled_v = { x: unit_vector.x * array[i], y: unit_vector.y * array[i] };
             var scaled_v2 = { x: unit_vector.x * array[i + 1], y: unit_vector.y * array[i + 1] };
@@ -100,151 +99,155 @@ class Tree {
             var yn = y + scaled_v.y;
             var xn2 = x2 + scaled_v2.x;
             var yn2 = y2 + scaled_v2.y;
-
+    
             point_arr[i].x = xn;
             point_arr[i].y = yn;
             point_arr[i + 1].x = xn2;
             point_arr[i + 1].y = yn2;
-
-            this.drawline(screen, { x: xn, y: yn }, { x: xn2, y: yn2 });
+    
+            drawline(screen, { x: xn, y: yn }, { x: xn2, y: yn2 }, color);
         }
         return (point_arr);
-    }
-
-    drawline(ctx, p1, p2) {
-        ctx = document.getElementById("myCanvas").getContext("2d");
-        ctx.strokeStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
     };
 
-    draw_flower(center, length) {
-        let ctx = this.screen;
-        ctx.fillStyle = this.color;
-        ctx.fillRect(center.x, center.y, length, length);
-    }
+    class Tree {
+        constructor(center = null, length = null, thickness = null, theta = null, color = "#4E90EC", screen) {
+            this.center = center;
+            this.length = length;
+            this.thickness = thickness;
+            this.theta = theta;
+            this.color = color;
+            this.screen = screen;
 
-    //the start theta defines the current planes rotation
-    random_flower(center, olength, thickness, start_theta) {
-        thickness = thickness * 0.8;
-        var num_branch = this.randInt(0, 5);
-        var interval;
-        if (num_branch > 0)
-            interval = olength / (num_branch);
-        else
-            interval = 0;
-        var spot = interval;
-
-        //make the top branch off many times
-        for (var i = 0; i < this.randInt(1, 3); i++) {
-            var theta = (this.randInt(50, 100) / 100) * (Math.PI / 4);
-            if (olength > 2) { //stop branching
-                var length = olength * this.randInt(50, 70) / 100;
-                var random_bin = this.randInt(0, 2);
-                var new_theta;
-                if (random_bin == 1)
-                    new_theta = start_theta - theta;
-                else
-                    new_theta = start_theta + theta;
-
-                //draw branch
-                var new_point = { x: center.x + (length * Math.cos(new_theta)), y: center.y - (length * Math.sin(new_theta)) };
-                if (length > 30) {
-                    var array = new Array(31).join('0').split('').map(parseFloat);
-                    this.random_koch(0, 29, 5, 0.5, array);
-                    this.draw_lines(array, this.screen, center, new_point);
+            this.trunk_length = Math.round((Math.random() * (.5 - .3) + .5) * length);
+            this.screen.fillStyle = this.color;
+        }
+    
+        draw_flower(center, length, ctx) {
+            // let ctx = this.screen;
+            // ctx.fillStyle = this.color;
+            ctx.fillRect(center.x, center.y, length, length);
+        }
+    
+        //the start theta defines the current planes rotation
+        random_flower(center, olength, thickness, start_theta) {
+            thickness = thickness * 0.8;
+            var num_branch = randInt(0, 5);
+            var interval;
+            if (num_branch > 0)
+                interval = olength / (num_branch);
+            else
+                interval = 0;
+            var spot = interval;
+    
+            //make the top branch off many times
+            for (var i = 0; i < randInt(1, 3); i++) {
+                var theta = (randInt(50, 100) / 100) * (Math.PI / 4);
+                if (olength > 2) { //stop branching
+                    var length = olength * randInt(50, 70) / 100;
+                    var random_bin = randInt(0, 2);
+                    var new_theta;
+                    if (random_bin == 1)
+                        new_theta = start_theta - theta;
+                    else
+                        new_theta = start_theta + theta;
+    
+                    //draw branch
+                    var new_point = { x: center.x + (length * Math.cos(new_theta)), y: center.y - (length * Math.sin(new_theta)) };
+                    if (length > 30) {
+                        var array = new Array(31).join('0').split('').map(parseFloat);
+                        random_koch(0, 29, 5, 0.5, array);
+                    draw_lines(array, this.screen, center, new_point, this.color);
+                    }
+                    else {
+                        drawline(this.screen, center, new_point, this.color);
+                    }
+                    //continue branch left and right
+                    this.random_flower(new_point, length, thickness, new_theta);
+                }
+            }
+    
+            for (var i = 0; i < num_branch - 1; i++) { //randomize the number of branches 
+                theta = randInt(50, 100) / 100 * Math.PI / 4;
+                if (olength < 2) { //stop branching, flower
+                    this.draw_flower(center, thickness, this.screen);
                 }
                 else {
-                    this.drawline(this.screen, center, new_point);
+                    var current_center = { x: center.x - (spot * Math.cos(start_theta)), y: center.y + (spot * Math.sin(start_theta)) };
+                    spot = spot + interval;
+                    length = olength * randInt(50, 70) / 100;
+                    random_bin = randInt(0, 2);
+                    if (random_bin == 1)
+                        new_theta = start_theta - theta;
+                    else
+                        new_theta = start_theta + theta;
+    
+                    //draw branch
+                    new_point = { x: current_center.x + length * Math.cos(new_theta), y: current_center.y - length * Math.sin(new_theta) };
+                    if (length > 30) {
+                        var array = new Array(31).join('0').split('').map(parseFloat);
+                        random_koch(0, 29, 5, 0.5, array);
+                        draw_lines(array, this.screen, current_center, new_point, thickness, this.color)
+                    } else {
+                        drawline(this.screen, current_center, new_point, this.color);
+                    }
+    
+                    //continue branch left and right
+                    this.random_flower(new_point, length, thickness, new_theta);
                 }
-
-                //continue branch left and right
-                this.random_flower(new_point, length, thickness, new_theta);
             }
         }
-
-        for (var i = 0; i < num_branch - 1; i++) { //randomize the number of branches 
-            theta = this.randInt(50, 100) / 100 * Math.PI / 4;
-            if (olength < 2) { //stop branching, flower
-                this.draw_flower(center, thickness);
+    
+        draw_tree() {
+            var two_variation = (Math.floor((Math.random() * 50)) + 70) / 100 * 2;
+            var branch_trunk = this.trunk_length / two_variation; //branches along top half of trunk
+            var branchless_trunk = this.trunk_length - branch_trunk;
+            var num_branch = randInt(1, 2);
+            var increment = branch_trunk / num_branch; //place branches along trunk on this increment
+    
+            for (var i = 0; i < num_branch; i++) {
+                var placement = branchless_trunk + (increment * i * Math.random());
+                //place random branching along spot on trunk
+                var branch_center = { x: this.center.x, y: this.center.y - placement };
+                this.random_flower(branch_center, placement * 0.7, 2, (Math.PI / 2));
             }
-            else {
-                var current_center = { x: center.x - (spot * Math.cos(start_theta)), y: center.y + (spot * Math.sin(start_theta)) };
-                spot = spot + interval;
-                length = olength * this.randInt(50, 70) / 100;
-                random_bin = this.randInt(0, 2);
-                if (random_bin == 1)
-                    new_theta = start_theta - theta;
-                else
-                    new_theta = start_theta + theta;
-
-                //draw branch
-                new_point = { x: current_center.x + length * Math.cos(new_theta), y: current_center.y - length * Math.sin(new_theta) };
-                if (length > 30) {
-                    var array = new Array(31).join('0').split('').map(parseFloat);
-                    this.random_koch(0, 29, 5, 0.5, array);
-                    this.draw_lines(array, this.screen, current_center, new_point, thickness)
-                } else {
-                    this.drawline(this.screen, current_center, new_point);
-                }
-
-                //continue branch left and right
-                this.random_flower(new_point, length, thickness, new_theta);
-            }
+    
+            //top of the tree
+            var new_center = { x: this.center.x, y: this.center.y - this.trunk_length };
+    
+            //draw a rickety trunk
+            var array = new Array(31).join('0').split('').map(parseFloat);
+            random_koch(0, 29, 5, 0.5, array);
+            draw_lines(array, this.screen, this.center, new_center, this.thickness, this.color);
+            this.random_flower(new_center, branch_trunk, this.thickness, (Math.PI / 2));
         }
     }
-
-    draw_tree() {
-        var two_variation = (Math.floor((Math.random() * 50)) + 70) / 100 * 2;
-        var branch_trunk = this.trunk_length / two_variation; //branches along top half of trunk
-        var branchless_trunk = this.trunk_length - branch_trunk;
-        var num_branch = this.randInt(1, 2);
-        var increment = branch_trunk / num_branch; //place branches along trunk on this increment
-
-        for (var i = 0; i < num_branch; i++) {
-            var placement = branchless_trunk + (increment * i * Math.random());
-            //place random branching along spot on trunk
-            var branch_center = { x: this.center.x, y: this.center.y - placement };
-            this.random_flower(branch_center, placement * 0.7, 2, (Math.PI / 2));
-        }
-
-        //top of the tree
-        var new_center = { x: this.center.x, y: this.center.y - this.trunk_length };
-
-        //draw a rickety trunk
-        var array = new Array(31).join('0').split('').map(parseFloat);
-        this.random_koch(0, 29, 5, 0.5, array);
-        this.draw_lines(array, this.screen, this.center, new_center, this.thickness);
-        this.random_flower(new_center, branch_trunk, this.thickness, (Math.PI / 2));
-    }
-}
-
-$(document).ready(function () {
-    onload();
-
-    $(".reload").click(function () {
-        onload();
-    });
-    function onload() {
+    
+    function drawtrees(totTrees=2, color="") {
         canvas = document.getElementById("myCanvas");
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
 
         // draw trees
-        let totTrees = 2;
+        // let totTrees = 2;
         for (let i = 0; i < totTrees; i++) {
-            center=new Tree({ x: Math.random() * canvas.width, y: canvas.height }, 
-            length=Math.round(canvas.height*5/6), 
-            thickness=10, 
-            theta=Math.PI/2, 
-            color="#"+Math.random().toString(16).slice(2, 8)).draw_tree();
+            if (color===""){
+                rand_color = "#"+Math.random().toString(16).slice(2, 8);
+            }
+            else
+                rand_color = color;
+            new Tree(
+                { x: Math.random() * canvas.width, y: canvas.height },
+                Math.round(canvas.height*5/6),
+                10,
+                Math.PI/2,
+                rand_color,
+                document.getElementById("myCanvas").getContext("2d")).draw_tree();
         }
 
         // draw the ground 
-        var array = new Array(51).join('0').split('').map(parseFloat);
-        new Tree().random_koch(0, 49, 50, 0.75, array);
+        var array = new Array(20).join('0').split('').map(parseFloat);
+        random_koch(0, 18, 50, 0.75, array);
         ctx = document.getElementById("myCanvas").getContext("2d");
         ctx.beginPath();
         ctx.moveTo(0, canvas.height - 30);
@@ -253,11 +256,23 @@ $(document).ready(function () {
             ctx.lineTo(x_inc * i, canvas.height - Math.abs(array[i]) - 30)
         }
         // complete the square
-        ctx.fillStyle = "#" + Math.random().toString(16).slice(2, 8);
+        if (color===""){
+            rand_color = "#"+Math.random().toString(16).slice(2, 8);
+        }
+        else
+            rand_color = color;
+        ctx.fillStyle = rand_color;
         ctx.lineTo(canvas.width, canvas.height);
         ctx.lineTo(0, canvas.height);
         ctx.lineTo(0, canvas.height - 30);
         ctx.closePath();
         ctx.fill();
     }
+
+    // drawtrees();
+    $(".submit").click(function () {
+        console.log($('#in_numtrees').val(), $('#in_color').val());
+        drawtrees(totTrees=$('#in_numtrees').val(), color=$('#in_color').val());
+        return false;
+    });
 });
